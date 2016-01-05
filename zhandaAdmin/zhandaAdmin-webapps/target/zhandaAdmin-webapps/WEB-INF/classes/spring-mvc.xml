@@ -7,7 +7,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/context
                     http://www.springframework.org/schema/context/spring-context-3.0.xsd 
                     http://www.springframework.org/schema/mvc
-                    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+                    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+                     default-autowire="byName" >
+                    
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在annotation-driven和component-scan之前,否则乱码问题同样无法解决 -->  
     <!--Spring3.1推荐使用RequestMappingHandlerAdapter -->
@@ -17,7 +19,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
         <property name="supportedMediaTypes">  
             <list>  
-                <value>text/html;charset=UTF-8</value>  
+                <value>application/json;charset=utf-8</value>  
             </list>  
         </property>  
     </bean> 
@@ -28,7 +30,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
                     <property name="supportedMediaTypes">  
                         <list>  
-                            <value>text/html;charset=UTF-8</value>  
+                            <value>application/json;charset=utf-8</value>  
                         </list>  
                     </property>  
                 </bean>
@@ -41,10 +43,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 <mvc:annotation-driven />
  
 <!-- 注解扫描包 -->
-	<context:component-scan base-package="com.zhandaAdmin.controller" use-default-filters="false"> 
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>	
+	<context:component-scan base-package="com.zhandaAdmin.*" /> 
 
 
 <!-- 静态资源(js/image)的访问 -->
