@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name></display-name>
 	<welcome-file-list>
-		<welcome-file>request_test.html</welcome-file>
+		<welcome-file>main.html</welcome-file>
 	</welcome-file-list>
 	
 <!-- 加载指定位置的配置文件 -->
