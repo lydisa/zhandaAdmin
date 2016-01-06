@@ -5,7 +5,8 @@
 var scotchApp = angular.module('scotchApp', ['ngRoute']);
 
 // configure our routes
-scotchApp.config(function ($routeProvider) {
+scotchApp.config(function ($routeProvider,$httpProvider) {
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
     $routeProvider
 
     // route for the about page

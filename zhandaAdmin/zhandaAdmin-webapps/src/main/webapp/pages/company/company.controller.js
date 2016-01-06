@@ -8,8 +8,10 @@
             $scope.getCompanyList=function(){
                 CompanyService.get().then(function(data) {
                     $scope.companyList = data;
+                    $scope.message = data;
                 });
             }
+            $scope.getCompanyList();
         });
 })()
 /**

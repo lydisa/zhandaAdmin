@@ -9,18 +9,19 @@
     <table class="table table-striped" ng-show="companyList">
         <thead>
         <tr>
-            <th class="center" width="20%">公司ID</th>
-            <th class="center" width="20%">名称</th>
-            <th class="center" width="20%">地址</th>
-            <th class="center" width="25%">联系人</th>
-            <th class="center" width="15%">联系电话</th>
-            <th class="center" width="15%">传真号码</th>
-            <th class="center" width="15%">公司类型</th>
+            <th class="center" width="10%">公司ID</th>
+            <th class="center" width="10%">名称</th>
+            <th class="center" width="10%">地址</th>
+            <th class="center" width="10%">联系人</th>
+            <th class="center" width="10%">联系电话</th>
+            <th class="center" width="10%">传真号码</th>
+            <th class="center" width="10%">公司类型</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="company in companyList">
             <td class="center">{{company.comId}}</td>
+            <td class="center">{{company.comName}}</td>
             <td class="center">{{company.comAddr}}</td>
             <td class="center">{{company.comPerson}}</td>
             <td class="center">{{company.comPhone}}</td>
