@@ -1,5 +1,6 @@
 package com.zhandaAdmin.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,21 @@ public class CompanyContorller {
 			result =new CommonResult("-1","failed",null);
 		return result;
 			
+	}
+
+	@RequestMapping(value = "/getAllCompany", method = RequestMethod.POST)
+	@ResponseBody
+	public CommonResult getAllCompany(@RequestBody  Company company) throws Exception {
+		//Company company= new Company();
+		//Integer id = Integer.parseInt(param.get("comId"));
+		//company.setComId(id);
+		List<Company> companyList = companyService.getCompanyList();
+		CommonResult result = null;
+		if(companyList != null)
+			result = new CommonResult("0","success",companyList);
+		else
+			result =new CommonResult("-1","failed",null);
+		return result;
+
 	}
 }
