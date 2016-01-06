@@ -5,27 +5,35 @@
     <title>公司</title>
 </head>
 <body>
-<ctg-panel panel-toolbar="false">
-    <table class="table table-striped" ng-show="companyList">
+<div class="panel panel-primary">
+    <table class="table " ng-show="companyList">
+        <div class="panel-heading">公司列表</div>
         <thead>
         <tr>
-            <th class="center" width="10%">公司ID</th>
             <th class="center" width="10%">名称</th>
             <th class="center" width="10%">地址</th>
             <th class="center" width="10%">联系人</th>
             <th class="center" width="10%">联系电话</th>
             <th class="center" width="10%">传真号码</th>
             <th class="center" width="10%">公司类型</th>
+            <th class="center" width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="company in companyList">
-            <td class="center">{{company.comId}}</td>
             <td class="center">{{company.comName}}</td>
             <td class="center">{{company.comAddr}}</td>
             <td class="center">{{company.comPerson}}</td>
             <td class="center">{{company.comPhone}}</td>
             <td class="center">{{company.comFax}}</td>
             <td class="center">{{company.comType}}</td>
+            <td class="center">
+                <button type="button" class="btn btn-primary ">编辑</button>
+                <button type="button" class="btn btn-danger ">删除</button>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
 </body>
 </html>
