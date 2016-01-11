@@ -17,17 +17,17 @@ public class reflectBean {
 	private Connection connection;
 	private PreparedStatement UserQuery;
 	/*mysql url�������ַ�*/
-	private static String url = "jdbc:mysql://127.0.0.1:3306/zhanda?useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true";
+	private static String url = "jdbc:mysql://127.0.0.1:3306/udalentity?useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true";
 	//�˺�
 	private static String user = "root";
 	//����
-	private static String password = "123456";
+	private static String password = "root";
 	private Vector<String> vector = new Vector<String>();
 	//mysql jdbc��java�����ַ�
 	private String driverClassName = "com.mysql.jdbc.Driver";
 	
 	//��ݿ��еı���
-	String table = "company";
+	String table = "table_te";
 	//��ݿ�������
 	private String[] oldColNames;//ԭ����
 	private String[] colnames; // ��������
