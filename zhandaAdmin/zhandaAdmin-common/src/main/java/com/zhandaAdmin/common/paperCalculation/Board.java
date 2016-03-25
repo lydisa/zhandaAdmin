@@ -2,6 +2,7 @@ package com.zhandaAdmin.common.paperCalculation;
 
 import com.zhandaAdmin.common.tools.MathTools;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -76,4 +77,52 @@ public class Board {
         return matchArea;
     }
 
+    public Board split(RectangleElement element,RectangleElement.EDGE splitEdge,float linkWidth,RectangleElement.EDGE linkEdge) throws Exception {
+        if(!this.elements.contains(element)){
+            throw new Exception("不对哦");
+        }
+        Board newBoard = new Board();
+        List<RectangleElement> newElements = new ArrayList<RectangleElement>();
+        RectangleElement link;
+        RectangleElement neighbor = null;
+        switch(splitEdge){
+            case LEFT:
+                neighbor = element.getLeft();
+                link = new RectangleElement((float)(element.getLenth()*0.8),linkWidth);
+                neighbor.setRight(link);
+                break;
+            case RIGHT:
+                neighbor = element.getRight();
+                link = new RectangleElement((float)(element.getLenth()*0.8),linkWidth);
+                element.setRight(link);
+                break;
+            case BUTTOM:
+                neighbor = element.getButtom();
+                link = new RectangleElement((float)(element.getWidth()*0.8),linkWidth);
+                element.setButtom(link);
+                break;
+            case TOP:
+                neighbor = element.getTop();
+                link = new RectangleElement((float)(element.getWidth()*0.8),linkWidth);
+                neighbor.setTop(link);
+                break;
+        }
+        if(neighbor==null){
+            return null;
+        }
+        move(this.elements,newElements,neighbor);
+        newBoard.setElements(newElements);
+        return newBoard;
+    }
+
+    private void move(List<RectangleElement> source, List<RectangleElement> target,RectangleElement element) {
+        if (target != null) {
+            target.add(element);
+            source.remove(element);
+            move(source, target, element.getLeft());
+            move(source, target, element.getRight());
+            move(source, target, element.getTop());
+            move(source, target, element.getButtom());
+        }
+    }
 }

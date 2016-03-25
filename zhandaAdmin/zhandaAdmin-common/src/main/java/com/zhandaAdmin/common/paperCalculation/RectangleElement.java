@@ -11,6 +11,10 @@ public class RectangleElement {
     private RectangleElement right;
     private RectangleElement top;
     private RectangleElement buttom;
+    enum EDGE{
+        LEFT,RIGHT,BUTTOM,TOP
+
+    }
 
     RectangleElement(float lenth,float width){
         this.point = new Point(0,0);
