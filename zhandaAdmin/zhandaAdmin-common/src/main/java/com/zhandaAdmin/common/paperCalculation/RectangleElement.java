@@ -11,12 +11,12 @@ public class RectangleElement {
     private RectangleElement right;
     private RectangleElement top;
     private RectangleElement buttom;
-    enum EDGE{
+    public enum EDGE{
         LEFT,RIGHT,BUTTOM,TOP
 
     }
 
-    RectangleElement(float lenth,float width){
+    public RectangleElement(float lenth, float width){
         this.point = new Point(0,0);
         this.lenth = lenth;
         this.width = width;
@@ -67,9 +67,14 @@ public class RectangleElement {
     }
 
     public void setLeft(RectangleElement left) {
+        if(left==null){
+            this.left=null;
+            return;
+        }
         float x = this.point.getX()-left.width;
         float y = this.point.getY()+(this.lenth-right.lenth)/2;
         left.setPoint(x,y);
+        left.right = this;
         this.left = left;
     }
 
@@ -78,9 +83,14 @@ public class RectangleElement {
     }
 
     public void setRight(RectangleElement right) {
+        if(right==null){
+            this.right=null;
+            return;
+        }
         float x = this.point.getX()+this.width;
         float y = this.point.getY()+(this.lenth-right.lenth)/2;
         right.setPoint(x,y);
+        right.left = this;
         this.right = right;
     }
 
@@ -89,9 +99,14 @@ public class RectangleElement {
     }
 
     public void setTop(RectangleElement top) {
+        if(top==null){
+            this.top=null;
+            return;
+        }
         float x = this.point.getX()+(this.width-top.width)/2;
         float y = this.point.getY()+this.lenth;
         top.setPoint(x,y);
+        top.buttom = this;
         this.top = top;
     }
 
@@ -100,9 +115,14 @@ public class RectangleElement {
     }
 
     public void setButtom(RectangleElement buttom) {
+        if(buttom==null){
+            this.buttom=null;
+            return;
+        }
         float x = this.point.getX()+(this.width-top.width)/2;
         float y = this.point.getY()-buttom.lenth;
         buttom.setPoint(x,y);
+        buttom.top = this;
         this.buttom = buttom;
     }
 

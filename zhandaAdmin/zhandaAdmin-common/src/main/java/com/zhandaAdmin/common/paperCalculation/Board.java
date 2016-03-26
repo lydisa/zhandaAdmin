@@ -23,10 +23,10 @@ public class Board {
     }
 
     public RectangleElement getArea() {
-        float left=0;
-        float right=0;
-        float top=0;
-        float buttom=0;
+        float left=this.getElements().get(0).getButtomLeftPoint().getX();
+        float right=this.getElements().get(0).getTopRightPoint().getX();
+        float top=this.getElements().get(0).getTopLeftPoint().getY();
+        float button=this.getElements().get(0).getButtomRightPoint().getY();
         Iterator<RectangleElement> iterator = elements.iterator();
         while (iterator.hasNext()){
             RectangleElement element = iterator.next();
@@ -39,25 +39,26 @@ public class Board {
             if(element.getTopLeftPoint().getY()>top){
                 top = element.getTopLeftPoint().getY();
             }
-            if(element.getButtomRightPoint().getY()<buttom){
-                buttom = element.getButtomRightPoint().getY();
+            if(element.getButtomRightPoint().getY()<button){
+                button = element.getButtomRightPoint().getY();
             }
         }
-        float lenth = top-buttom;
+        float length = top-button;
         float width = right-left;
         if(this.area==null){
-            area = new RectangleElement(lenth,width);
+            area = new RectangleElement(length,width);
         }
-        area.setLenth(lenth);
+        area.setLenth(length);
         area.setWidth(width);
-        area.setPoint(left,buttom);
+        area.setPoint(left,button);
         return area;
     }
 
 
     public RectangleElement getMatchArea(float[] widths,float[] lenths) {
-        float lenth = getArea().getLenth();
-        float width = getArea().getWidth();
+        RectangleElement area = getArea();
+        float lenth = area.getLenth();
+        float width = area.getWidth();
         if(widths!=null){
             width = MathTools.binarySearchKey(widths,this.getArea().getWidth());
         }
@@ -88,23 +89,43 @@ public class Board {
         switch(splitEdge){
             case LEFT:
                 neighbor = element.getLeft();
+                element.setLeft(null);
+                if(neighbor!=null) {
+                    neighbor.setRight(null);
+                }
                 link = new RectangleElement((float)(element.getLenth()*0.8),linkWidth);
                 neighbor.setRight(link);
+                newElements.add(link);
                 break;
             case RIGHT:
                 neighbor = element.getRight();
+                element.setRight(null);
+                if(neighbor!=null) {
+                    neighbor.setLeft(null);
+                }
                 link = new RectangleElement((float)(element.getLenth()*0.8),linkWidth);
                 element.setRight(link);
+                this.elements.add(link);
                 break;
             case BUTTOM:
                 neighbor = element.getButtom();
+                element.setButtom(null);
+                if(neighbor!=null) {
+                    neighbor.setTop(null);
+                }
                 link = new RectangleElement((float)(element.getWidth()*0.8),linkWidth);
                 element.setButtom(link);
+                this.elements.add(link);
                 break;
             case TOP:
                 neighbor = element.getTop();
+                element.setTop(null);
+                if(neighbor!=null) {
+                    neighbor.setButtom(null);
+                }
                 link = new RectangleElement((float)(element.getWidth()*0.8),linkWidth);
                 neighbor.setTop(link);
+                newElements.add(link);
                 break;
         }
         if(neighbor==null){
@@ -116,7 +137,7 @@ public class Board {
     }
 
     private void move(List<RectangleElement> source, List<RectangleElement> target,RectangleElement element) {
-        if (target != null) {
+        if (element != null && source.contains(element)) {
             target.add(element);
             source.remove(element);
             move(source, target, element.getLeft());
@@ -124,5 +145,20 @@ public class Board {
             move(source, target, element.getTop());
             move(source, target, element.getButtom());
         }
+    }
+
+    public void init(int oriX,int oriY){
+        getArea();
+        float x = oriX-area.getPoint().getX();
+        float y = oriY-area.getPoint().getY();
+        Iterator<RectangleElement> iterator = elements.iterator();
+        while (iterator.hasNext()){
+            RectangleElement element = iterator.next();
+            element.setPoint(element.getPoint().getX()+x,element.getPoint().getY()+y);
+        }
+
+    }
+    public  void init(){
+        init(0,0);
     }
 }
