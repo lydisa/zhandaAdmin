@@ -1,0 +1,279 @@
+/**
+ * Created by admin on 2016/3/30.
+ */
+<html>
+<head>
+<base href="<%=basePath%>">
+
+    <title>大屏屏幕</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <link href="<%=path%>/css/font.css" rel="stylesheet" type="text/css" />
+    <SCRIPT LANGUAGE="JavaScript">
+var canChange = 1;
+var candraw = 1;
+function main_mouseup()
+{
+    candraw = 0;
+}
+function init()
+{
+    var aDivs = document.getElementsByTagName("div");
+    for (var i=0; i<aDivs.length; i++) {
+        new neverDragDivision(aDivs[i]);
+    }
+}
+function changeColorToSelected(id)
+{
+    id1=""+id;
+    var td =document.getElementById(id1);
+    td.bgColor = "#0000C6";
+}
+
+function changeColorToNotSelected(id)
+{
+    id1=""+id;
+    var td =document.getElementById(id1);
+    td.bgColor = "#BEBEBE";
+}
+function changecolor(id)
+{
+    if(canChange == 1)
+    {
+        if(id<1000)
+        {
+            id1=""+id;
+            var td =document.getElementById(id1);
+
+            var str = td.bgColor;
+//alert(str);
+            var str1 = "#bebebe"; //黑色
+            var str2 = "#008000"; //绿色
+            if(str == str1)
+            {
+                td.bgColor = "#0000C6"; //red说明这个位置可以放！
+// ps[id] = 1;
+            }
+            else
+            {
+//ps[id] = 0;
+                td.bgColor = "#BEBEBE";
+            }
+        }
+        else
+        {
+            id1=""+id;
+            var td =document.getElementById(id1);
+            var str = td.bgColor;
+            var str2 = "#008000"; //绿色
+            if(str == str2)
+            {
+                td.bgColor = "white";
+                isHasChang=0;
+            }
+            else td.bgColor = "green";
+            {
+                isHasChang=1;
+            }
+        }
+    }
+}
+var startId;
+var endId;
+var list = 5;
+var up = 5;
+var down = 6;
+var selectFun = 0;
+function changeStart(id)
+{
+    resetcheck();
+    candraw = 1;
+    switch(event.button)
+    {
+        case 1: selectFun = 0; break;
+        case 2: selectFun = 1; break;
+    }
+//获得鼠标按下的那个格子的ID，来确定是哪个格子
+//alert('start');
+    startId = id;
+
+}
+function changeColorBySE(id1,id2)
+{
+    var Sx,Sy,Ex,Ey;
+    var startP; //the last start point
+    var endP; //the end point
+    var changeId;
+    Sx = id1%list;
+    Sy = Math.floor(id1/list);
+//alert(Sy);
+    Ex = id2%list;
+    Ey = Math.floor(id2/list);
+    DisX = Math.abs(Sx-Ex); //差距为几列
+//alert("DisX:"+DisX);
+    DisY = Math.abs(Sy-Ey); //差距为几行
+//alert("DisY:"+DisY);
+//这个函数功能是将所有的矩形开始结束全部转变为左上右下
+    function StartChange(id1,id2)
+    {
+
+        if((id1<id2)&&(id1%list<id2%list)) {startP = id1;endP = id2;}
+        else if((id1>id2)&&(id1%list>id2%list)) {startP = id2;endP = id1;}
+        else{
+//alert(DisY);
+            startP = (id1<id2)?(id1-DisX):(id2-DisX);
+            endP = (id1<id2)?(id2+DisY):(id1+DisY);
+        }
+//alert("startP:"+startP+"endP:"+endP);
+    }
+//开始点在结束点的下面
+//转换包含(Sx,Sy),(Ex,Ey)区域的颜色
+    StartChange(id1,id2);
+
+    for(i=0;i<DisY+1;i++)
+    {
+        for(j=0;j<DisX+1;j++)
+        {
+            changeId = startP+j+i*list;
+//alert(changeId);
+            selectFun == 0?changeColorToSelected(changeId):changeColorToNotSelected(changeId);
+        }
+    }
+//alert(Sx);
+}
+function changUpEnd()
+{
+    if(startId == endId){
+        candraw = 1;
+        changeColorToNotSelected(startId);
+        document.getElementById("startid").value = startId;
+        document.getElementById("endid").value = startId;
+        window.parent.screenEvent(startId,startId,'<%=sSingalID%>');
+    }else{
+        candraw = 0;
+        document.getElementById("startid").value = startId;
+        document.getElementById("endid").value = endId;
+        window.parent.screenEvent(startId,endId,'<%=sSingalID%>');
+    }
+}
+function changeEnd(id)
+{
+//获得了最后的一个格子。
+    if(candraw == 1){
+        endId = id;
+//alert(endId);
+//算法
+        /*
+         *根据起始ID 和 最后ID来确定是哪些格子变
+         * 计算start和end的行，列数
+         */
+        changeColorBySE(startId,endId);
+    }
+
+}
+function neverDragDivision(fObj) { with (this)
+{
+    if (!fObj) return;
+    this.bDraged = false;
+    this.oDragOrig = fObj;
+    oDragOrig.onmousedown = function()
+    {
+        oDragOrig.style.backgroundColor="#FFFFFF";
+//alert(event.clientY);
+//alert(oDragOrig.offsetTop);
+//var ofs = Offset(oDragOrig);
+// oDragOrig.style.position = "absolute";
+//oDragOrig.style.left = ofs.l;
+//oDragOrig.style.top = ofs.t;
+//alert(oDragOrig.style.top);
+//oDragOrig.X = event.clientX - ofs.l;
+//oDragOrig.Y = event.clientY - ofs.t;
+        bDraged = true;
+    };
+    /*
+     oDragOrig.onmousemove = function()
+     {
+     if (!bDraged) return;
+     oDragOrig.setCapture();
+     oDragOrig.style.left = event.clientX - oDragOrig.X;
+     oDragOrig.style.top = event.clientY - oDragOrig.Y;
+     };*/
+    /*
+     oDragOrig.onmouseup = function()
+     {
+     bDraged = false;
+     oDragOrig.releaseCapture();
+     };*/
+    function Offset(e) {
+        var t = e.offsetTop;
+        var l = e.offsetLeft;
+        var w = e.offsetWidth;
+        var h = e.offsetHeight;
+        while(ee=e.offsetParent) {
+            t+=e.offsetTop;
+            l+=e.offsetLeft;
+        }
+        return { t:t, l:l, w:w, h:h }
+    };
+}};
+</SCRIPT>
+<style type="text/css">
+    <!--
+        body {
+    scrollbar-face-color: #E9F1F7; /*面部颜色*/
+    scrollbar-shadow-color: #D8E2E7; /*内边框右下*/
+    scrollbar-highlight-color: #FFFFFF; /*内边框左上*/
+    scrollbar-3dlight-color: #96AABD; /*外边框左上*/
+    scrollbar-darkshadow-color: #96AABD; /*外边框右下*/
+    scrollbar-track-color: #e2e7eb; /*底部颜色*/
+    scrollbar-arrow-color: #96AABD; /*三角头*/
+    background-color: #F1F4F7;
+}
+-->
+</style>
+</head>
+
+<body onselectstart="return false" oncontextmenu="window.event.returnValue=false" onmouseup=main_mouseup()>
+    <center>
+    <script>
+    document.write('<table border="0" align="center">');
+document.write('<tr>');
+
+number=1;
+number1=1;
+var i;
+up=5;
+list=8;
+for(i=0;i<(up*list);i++)
+{
+    document.write('<td width="60" height="60" bgColor="#BEBEBE" id="'+i+'" onmouseMove="changeEnd(parseInt(id))" onmouseUp="changUpEnd()" onmouseDown="changeStart(parseInt(id))" onclick="changecolor(parseInt(id))")></td>');
+    if((i<((up*list)-list))&&(i+1)%list==0)
+    {
+        document.write('</tr><tr>');
+
+        number++;
+    }
+}
+document.write('</tr><tr>');
+document.write('<td>');
+document.write('</td>');
+document.write('</tr></table>');
+
+function resetcheck(){
+    for(i=0;i<(up*list);i++){
+        changeColorToNotSelected(i);
+
+    }
+
+}
+</script>
+</center>
+<!--
+    strat id<input type=text value="" id="startid" name="startid" />
+    end id<input type=text value="" id="endid" name="endid" /> -->
+    </body>
+    </html>
