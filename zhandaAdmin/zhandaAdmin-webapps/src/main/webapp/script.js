@@ -1,9 +1,9 @@
 // script.js
-
+'use strict';
 // create the module and name it scotchApp
 // also include ngRoute for all our routing needs
 angular.module('component', []);
-var scotchApp = angular.module('scotchApp', ['ngRoute']);
+var scotchApp = angular.module('scotchApp', ['ngRoute','component']);
 
 // configure our routes
 scotchApp.config(function ($routeProvider,$httpProvider) {
@@ -78,9 +78,10 @@ scotchApp.controller('test', function ($scope,ProductService) {
     $scope.size={
         width:window.innerWidth
     }
+    $scope.boards={}
     $scope.getBoards = function () {
         ProductService.get().then(function(data){
-            $scope.boards = data.data;
+            $scope.boards = data;
         })
     }
     $scope.getBoards();

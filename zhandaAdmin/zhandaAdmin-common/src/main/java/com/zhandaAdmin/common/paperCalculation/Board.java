@@ -48,31 +48,40 @@ public class Board {
         if(this.area==null){
             area = new RectangleElement(null,length,width);
         }
-        area.setLenth(length);
+        area.setLength(length);
         area.setWidth(width);
         area.setPoint(left,button);
         return area;
     }
 
 
-    public RectangleElement getMatchArea(float[] widths,float[] lenths) {
+     public RectangleElement getMatchArea(){
+     return this.matchArea;
+    }
+    public RectangleElement getMatchArea(float[] widths,float[] lengths) {
         RectangleElement area = getArea();
-        float lenth = area.getLenth();
+        float length = area.getLength();
         float width = area.getWidth();
         if(widths!=null){
             width = MathTools.binarySearchKey(widths,this.getArea().getWidth());
         }
-        if(lenths!=null){
-            lenth = MathTools.binarySearchKey(lenths,this.getArea().getLenth());
+        else{
+            width = this.getArea().getWidth();
+        }
+        if(lengths!=null){
+            length = MathTools.binarySearchKey(lengths,this.getArea().getLength());
+        }
+        else{
+            length = this.getArea().getLength();
         }
         Point center = getArea().getCenterPoint();
         float x = center.getX() - width/2;
-        float y = center.getY() - lenth/2;
+        float y = center.getY() - length/2;
         if(this.matchArea==null){
-            this.matchArea = new RectangleElement(null,lenth,width,x,y);
+            this.matchArea = new RectangleElement(null,length,width,x,y);
         }else{
             this.matchArea.setWidth(width);
-            this.matchArea.setLenth(lenth);
+            this.matchArea.setLength(length);
             this.matchArea.setPoint(x,y);
         }
         return matchArea;
@@ -93,7 +102,7 @@ public class Board {
                 if(neighbor!=null) {
                     neighbor.setRight(null);
                 }
-                link = new RectangleElement("-1",(float)(element.getLenth()*0.8),linkWidth);
+                link = new RectangleElement("-1",(float)(element.getLength()*0.8),linkWidth);
                 neighbor.setRight(link);
                 newElements.add(link);
                 break;
@@ -103,7 +112,7 @@ public class Board {
                 if(neighbor!=null) {
                     neighbor.setLeft(null);
                 }
-                link = new RectangleElement("-1",(float)(element.getLenth()*0.8),linkWidth);
+                link = new RectangleElement("-1",(float)(element.getLength()*0.8),linkWidth);
                 element.setRight(link);
                 this.elements.add(link);
                 break;

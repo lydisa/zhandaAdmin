@@ -32,10 +32,10 @@ public class Rect extends Applet{
     }
     private void paintBox(Board board,Graphics g){
         g.setColor(Color.RED);
-        g.fillRect((int) board.getArea().getPoint().getX(), (int) board.getArea().getPoint().getY(), (int) board.getArea().getWidth(), (int) board.getArea().getLenth());
+        g.fillRect((int) board.getArea().getPoint().getX(), (int) board.getArea().getPoint().getY(), (int) board.getArea().getWidth(), (int) board.getArea().getLength());
         g.setColor(Color.BLACK);
         for (RectangleElement e : board.getElements()) {
-            g.drawRect((int) e.getPoint().getX(), (int) e.getPoint().getY(), (int) e.getWidth(), (int) e.getLenth());
+            g.drawRect((int) e.getPoint().getX(), (int) e.getPoint().getY(), (int) e.getWidth(), (int) e.getLength());
         }
     }
 }

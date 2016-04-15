@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class RectangleElement {
     private String id;
-    private float lenth;
+    private float length;
     private float width;
     private Point point;
     private RectangleElement left;
@@ -23,23 +23,23 @@ public class RectangleElement {
 
     }
 
-    public RectangleElement(String id,float lenth, float width){
+    public RectangleElement(String id, float length, float width){
         this.point = new Point(0,0);
-        this.lenth = lenth;
+        this.length = length;
         this.width = width;
         this.id = id;
     }
 
-    RectangleElement(String id,float lenth,float width,Point point){
+    RectangleElement(String id, float length, float width, Point point){
         this.point = point;
-        this.lenth = lenth;
+        this.length = length;
         this.width = width;
         this.id = id;
     }
 
-    RectangleElement(String id,float lenth,float width,float x,float y){
+    RectangleElement(String id, float length, float width, float x, float y){
         this.point = new Point(x,y);
-        this.lenth = lenth;
+        this.length = length;
         this.width = width;
         this.id = id;
     }
@@ -52,12 +52,12 @@ public class RectangleElement {
         this.id = id;
     }
 
-    public float getLenth() {
-        return lenth;
+    public float getLength() {
+        return length;
     }
 
-    public void setLenth(float lenth) {
-        this.lenth = lenth;
+    public void setLength(float length) {
+        this.length = length;
     }
 
     public float getWidth() {
@@ -93,7 +93,7 @@ public class RectangleElement {
             return;
         }
         float x = this.point.getX()-left.width;
-        float y = this.point.getY()+(this.lenth-right.lenth)/2;
+        float y = this.point.getY()+(this.length -right.length)/2;
         left.setPoint(x,y);
         left.right = this;
         left.rightId =this.id;
@@ -112,7 +112,7 @@ public class RectangleElement {
             return;
         }
         float x = this.point.getX()+this.width;
-        float y = this.point.getY()+(this.lenth-right.lenth)/2;
+        float y = this.point.getY()+(this.length -right.length)/2;
         right.setPoint(x,y);
         right.left = this;
         right.leftId = this.id;
@@ -131,7 +131,7 @@ public class RectangleElement {
             return;
         }
         float x = this.point.getX()+(this.width-top.width)/2;
-        float y = this.point.getY()+this.lenth;
+        float y = this.point.getY()+this.length;
         top.setPoint(x,y);
         top.buttom = this;
         top.buttonId = this.id;
@@ -150,7 +150,7 @@ public class RectangleElement {
             return;
         }
         float x = this.point.getX()+(this.width-top.width)/2;
-        float y = this.point.getY()- buttom.lenth;
+        float y = this.point.getY()- buttom.length;
         buttom.setPoint(x,y);
         buttom.top = this;
         buttom.topId=this.id;
@@ -163,7 +163,7 @@ public class RectangleElement {
     }
 
     public Point getTopLeftPoint(){
-        float y = this.point.getY()+this.lenth;
+        float y = this.point.getY()+this.length;
         return new Point(this.point.getX(),y);
     }
 
@@ -174,13 +174,13 @@ public class RectangleElement {
 
     public Point getTopRightPoint(){
         float x = this.point.getX() + width;
-        float y = this.point.getY() + lenth;
+        float y = this.point.getY() + length;
         return new Point(x,y);
     }
 
     public  Point getCenterPoint(){
         float x = this.point.getX() + width;
-        float y = this.point.getY() + lenth;
+        float y = this.point.getY() + length;
         return new Point(x/2,y/2);
     }
     public void move(float x,float y,RectangleElement entrance){

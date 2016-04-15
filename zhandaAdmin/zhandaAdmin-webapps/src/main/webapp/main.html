@@ -9,10 +9,6 @@
 
     <!-- SPELLS -->
     <!-- load angular via CDN -->
-    <script src="lib/js/angular.js"></script>
-    <script src="lib/js/angular-route.js"></script>
-
-    <script src="script.js"></script>
 
 </head>
 <body ng-controller="mainController">
@@ -75,13 +71,18 @@
 <div class="container">
     <footer class="text-center col-xs-12">
         View the tutorial on <a href="http://scotch.io/tutorials/angular-routing-and-templating-tutorial">Scotch.io</a>
+        <div ng-controller="test">
+            <box-plane-viewer boards="boards" size="size">
+                haha
+            </box-plane-viewer>
+        </div>
+        <script src="lib/js/angular.js"></script>
+        <script src="lib/js/angular-route.js"></script>
+        <script src="script.js"></script>
         <script src="component/boxPlaneViewer/boxPlaneViewer.derective.js"></script>
         <script src="pages/company/company.service.js"></script>
         <script src="pages/company/company.controller.js"></script>
         <script src="pages/product/productEditor.service.js"></script>
-        <div ng-controller="test">
-            <box-plane-viewer boards="boards" size="size"></box-plane-viewer>
-        </div>
     </footer>
 </div>
 </body>

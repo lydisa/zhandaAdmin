@@ -12,7 +12,7 @@
                     //初始化DOM模型, 包括初始化canvas等;
                     var node = templateElement[0];
                     var width = node.getAttribute('width') || '400';
-                    var height = node.getAttribute('height') || '400';
+                    var height = node.getAttribute('height') || '1200';
                     var canvas = document.createElement('canvas');
                     var boardsCopy;
                     canvas.setAttribute('width', width);
@@ -29,42 +29,44 @@
                     
                     var draw = function(boards){
                         //board.width = height board.length = width;
+                        canvas.setAttribute('width', width);
+                        canvas.setAttribute('height', height);
                         var ctx = canvas.getContext('2d');
                         ctx.clearRect(0, 0, width, height);
-                        var padding = 5;
+                        var padding = 1;
                         var totalWidth = 0;
-                        for(var board in boards){
-                            totalWidth+=2* padding +board.matchArea.length;
+                        for(var i=0;i<boards.length;i++){
+                            totalWidth+=2* padding +boards[i].matchArea.length;
                         }
                         var percent = width/totalWidth;
                         ctx.scale(percent,percent);
-                        var offsetX = padding;
-                        var offsetY = padding;
-                        for(var board in boards){
+                        var offsetX = 0;
+                        var offsetY = 0;
+                        for(var i=0;i<boards.length;i++){
                             //绘制matchArea
-                            ctx.strokeStyle= fixedBoardColor;
-                            ctx.fillRect(board.matchArea.point.x+offsetX,board.matchArea.point.y+offsetY,board.matchArea.length,matchArea.width);
+                            //ctx.strokeStyle= fixedBoardColor;
+                            //ctx.fillRect(boards[i].matchArea.point.x+offsetX,boards[i].matchArea.point.y+offsetY,boards[i].matchArea.length,boards[i].matchArea.width);
                             //绘制Area
-                            ctx.strokeStyle = boardColor;
-                            ctx.fillRect(board.area.point.x+offsetX,board.area.point.y+offsetY,board.area.length,area.width);
+                            //ctx.strokeStyle = boardColor;
+                            //ctx.fillRect(boards[i].area.point.x+offsetX,boards[i].area.point.y+offsetY,boards[i].area.length,boards[i].area.width);
                             //绘制element
                             ctx.strokeStyle = lineColor;
-                            for(var e in board.elements){
-                                ctx.strokeRect(e.point.x+offsetX,e.point.y+offsetY,e.length,e.width);
+                            for(var j=0;j<boards[i].elements.length;j++){
+                                ctx.strokeRect(boards[i].elements[j].point.x+offsetX,boards[i].elements[j].point.y+offsetY,boards[i].elements[j].length,boards[i].elements[j].width);
                             }
-                            offsetX += board.matchArea.length+2*padding;
+                            //offsetX += boards[i].matchArea.length+2*padding;
                         }
                     }
                     
                     return {
                         pre: function preLink(scope, instanceElement, instanceAttributes, controller) {
-                            scope.$watch(scope.boards, function (newValue, oldValue) {
-                                boardsCopy = scope.boards;
-                                draw(boardsCopy);
+                            scope.$watch('boards', function (newValue, oldValue) {
+                                scope.boards = newValue;
+                                draw(scope.boards);
                             }, true);
-                            scope.$watch(scope.size, function (newValue, oldValue) {
-                                width = size.width;
-                                draw(boardsCopy);
+                            scope.$watch('size', function (newValue, oldValue) {
+                                width = newValue.width;
+                                draw(scope.boards);
                             }, true);
                         },
                         post: function postLink(scope, instanceElement, instanceAttributes, controller) {}
@@ -73,11 +75,9 @@
             };
             var roundProgress = {
                 //compile里面先对dom进行操作, 再对$socpe进行监听;
+                restrict:'E',
                 compile: compilationFunction,
-                scope:{
-                    boards:"=boards",
-                    size:"=size"
-                },
+                scope:false,
                 replace: true
             };
             
