@@ -39,7 +39,11 @@ public class ProductController {
     public CommonResult getBoards(@RequestBody Company company) throws Exception {
 
         Board board = paperService.unfoldBox(99,120,34, PaperService.BoxType.NORMAL);
-        List<Board> boards = paperService.split2(board);
+        List<Board> boards = paperService.split4(board);
+        for(Board board1 :boards){
+            board1.init();
+            board1.getMatchArea(null,null);
+        }
         //输出处理
         JsonConfig config = new JsonConfig();
         config.setIgnoreDefaultExcludes(false);

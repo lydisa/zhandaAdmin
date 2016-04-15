@@ -165,7 +165,8 @@ public class Board {
 //            RectangleElement element = iterator.next();
 //            element.setPoint(element.getPoint().getX()+x,element.getPoint().getY()+y);
 //        }
-            elements.get(0).setPoint(elements.get(0).getPoint().getX()+x,elements.get(0).getPoint().getY()+y);
+        area.setPoint(oriX,oriY);
+        elements.get(0).setPoint(elements.get(0).getPoint().getX()+x,elements.get(0).getPoint().getY()+y);
     }
     public  void init(){
         init(0,0);

@@ -33,28 +33,28 @@
                         canvas.setAttribute('height', height);
                         var ctx = canvas.getContext('2d');
                         ctx.clearRect(0, 0, width, height);
-                        var padding = 1;
+                        var padding = 12;
                         var totalWidth = 0;
                         for(var i=0;i<boards.length;i++){
-                            totalWidth+=2* padding +boards[i].matchArea.length;
+                            totalWidth+=2* padding +boards[i].matchArea.width;
                         }
                         var percent = width/totalWidth;
                         ctx.scale(percent,percent);
-                        var offsetX = 0;
-                        var offsetY = 0;
+                        var offsetX = padding;
+                        var offsetY = padding;
                         for(var i=0;i<boards.length;i++){
                             //绘制matchArea
-                            //ctx.strokeStyle= fixedBoardColor;
-                            //ctx.fillRect(boards[i].matchArea.point.x+offsetX,boards[i].matchArea.point.y+offsetY,boards[i].matchArea.length,boards[i].matchArea.width);
+                            ctx.strokeStyle= fixedBoardColor;
+                            ctx.strokeRect(boards[i].matchArea.point.x+offsetX,boards[i].matchArea.point.y+offsetY,boards[i].matchArea.width,boards[i].matchArea.length);
                             //绘制Area
-                            //ctx.strokeStyle = boardColor;
-                            //ctx.fillRect(boards[i].area.point.x+offsetX,boards[i].area.point.y+offsetY,boards[i].area.length,boards[i].area.width);
+                            ctx.fillStyle = boardColor;
+                            ctx.fillRect(boards[i].area.point.x+offsetX,boards[i].area.point.y+offsetY,boards[i].area.width,boards[i].area.length);
                             //绘制element
                             ctx.strokeStyle = lineColor;
                             for(var j=0;j<boards[i].elements.length;j++){
-                                ctx.strokeRect(boards[i].elements[j].point.x+offsetX,boards[i].elements[j].point.y+offsetY,boards[i].elements[j].length,boards[i].elements[j].width);
+                                ctx.strokeRect(boards[i].elements[j].point.x+offsetX,boards[i].elements[j].point.y+offsetY,boards[i].elements[j].width,boards[i].elements[j].length);
                             }
-                            //offsetX += boards[i].matchArea.length+2*padding;
+                            offsetX += boards[i].matchArea.width+padding;
                         }
                     }
                     

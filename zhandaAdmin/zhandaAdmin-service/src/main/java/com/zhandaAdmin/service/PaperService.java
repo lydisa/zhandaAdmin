@@ -45,6 +45,7 @@ public class PaperService implements IPaperService{
         List<Board> list = new ArrayList<Board>();
         Board newBoard = board.split(board.getElements().get(2), RectangleElement.EDGE.LEFT,5, RectangleElement.EDGE.RIGHT);
         newBoard.init();
+        board.init();
         newBoard.getMatchArea(null,null);
         board.getMatchArea(null,null);
         list.add(newBoard);

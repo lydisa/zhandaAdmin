@@ -76,7 +76,7 @@ scotchApp.controller('contactController', function ($scope) {
 
 scotchApp.controller('test', function ($scope,ProductService) {
     $scope.size={
-        width:window.innerWidth
+        width:document.getElementById("viewer").offsetWidth
     }
     $scope.boards={}
     $scope.getBoards = function () {
