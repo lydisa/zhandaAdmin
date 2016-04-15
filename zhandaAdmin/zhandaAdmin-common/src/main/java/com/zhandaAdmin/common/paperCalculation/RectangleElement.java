@@ -90,6 +90,7 @@ public class RectangleElement {
     public void setLeft(RectangleElement left) {
         if(left==null){
             this.left=null;
+            this.leftId=null;
             return;
         }
         float x = this.point.getX()-left.width;
@@ -109,6 +110,7 @@ public class RectangleElement {
     public void setRight(RectangleElement right) {
         if(right==null){
             this.right=null;
+            this.rightId=null;
             return;
         }
         float x = this.point.getX()+this.width;
@@ -128,6 +130,7 @@ public class RectangleElement {
     public void setTop(RectangleElement top) {
         if(top==null){
             this.top=null;
+            this.topId=null;
             return;
         }
         float x = this.point.getX()+(this.width-top.width)/2;
@@ -147,6 +150,7 @@ public class RectangleElement {
     public void setButtom(RectangleElement buttom) {
         if(buttom ==null){
             this.buttom =null;
+            this.buttonId=null;
             return;
         }
         float x = this.point.getX()+(this.width-top.width)/2;
