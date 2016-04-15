@@ -8,13 +8,12 @@ import com.zhandaAdmin.common.paperCalculation.RectangleElement;
 
 import java.applet.*;
 import java.awt.*;
-import java.util.*;
 
 public class Rect extends Applet{
     public void paint(Graphics g){
-        PaperCalculation paper = new PaperCalculation();
+        PaperService paper = new PaperService();
         try {
-            Board newboard = paper.unfoldBox(99,120,34, PaperCalculation.BoxType.NORMAL);
+            Board newboard = paper.unfoldBox(99,120,34, PaperService.BoxType.NORMAL);
 //            java.util.List<Board> boards = paper.split4(newboard);
 //            for(int i=0;i<boards.size();i++) {
 //                Board board =boards.get(i);

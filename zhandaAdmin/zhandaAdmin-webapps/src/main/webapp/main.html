@@ -13,8 +13,6 @@
     <script src="lib/js/angular-route.js"></script>
 
     <script src="script.js"></script>
-    <script src="pages/company/company.service.js"></script>
-    <script src="pages/company/company.controller.js"></script>
 
 </head>
 <body ng-controller="mainController">
@@ -28,8 +26,8 @@
             </div>
 
             <!--<ul class="nav navbar-nav navbar-right">-->
-                <!--<li ng-repeat="menu in menus" ng-click="changeMenu($index)"><a href={{menu.href}}><i-->
-                        <!--class="fa fa-home"></i> {{menu.text}}</a></li>-->
+            <!--<li ng-repeat="menu in menus" ng-click="changeMenu($index)"><a href={{menu.href}}><i-->
+            <!--class="fa fa-home"></i> {{menu.text}}</a></li>-->
 
             </ul>
         </div>
@@ -37,24 +35,24 @@
 </header>
 
 <nav class="navbar well">
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-xs-12">
-            <ul class="nav nav-pills navbar-collapse">
-                <li ng-repeat="menu in menus" ng-class="{'active':menuSelected.text == menu.text}">
-                    <a href={{menu.href}} ng-click="changeMenu($index)">{{menu.text}}</a>
-                </li>
-            </ul>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-xs-12">
+                <ul class="nav nav-pills navbar-collapse">
+                    <li ng-repeat="menu in menus" ng-class="{'active':menuSelected.text == menu.text}">
+                        <a href={{menu.href}} ng-click="changeMenu($index)">{{menu.text}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-    </nav>
+</nav>
 
 
-    <div class="row-fluid">
-        <div class="col-xs-1 ">
-            <div class="panel panel-primary">
-                <div class="panel-heading">菜单</div>
+<div class="row-fluid">
+    <div class="col-xs-1 ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">菜单</div>
             <ul class="nav nav-list ">
                 <li class="nav-header">
 
@@ -64,20 +62,27 @@
                 </li>
             </ul>
         </div>
-            </div>
-
-        <div class="col-xs-11">
-            <div ng-view></div>
-        </div>
-
     </div>
+
+    <div class="col-xs-11">
+        <div ng-view></div>
+    </div>
+
+</div>
 </div>
 
 <!-- FOOTER -->
-<div class = "container">
-<footer class="text-center col-xs-12">
-    View the tutorial on <a href="http://scotch.io/tutorials/angular-routing-and-templating-tutorial">Scotch.io</a>
-</footer>
+<div class="container">
+    <footer class="text-center col-xs-12">
+        View the tutorial on <a href="http://scotch.io/tutorials/angular-routing-and-templating-tutorial">Scotch.io</a>
+        <script src="component/boxPlaneViewer/boxPlaneViewer.derective.js"></script>
+        <script src="pages/company/company.service.js"></script>
+        <script src="pages/company/company.controller.js"></script>
+        <script src="pages/product/productEditor.service.js"></script>
+        <div ng-controller="test">
+            <box-plane-viewer boards="boards" size="size"></box-plane-viewer>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

@@ -45,7 +45,7 @@
 </div>
 <div style="width:95%;margin-right:100px;">
 	<center>
-		<input type="button" value="发送业务报文" style="text-align: center;margin-top:20px;" onclick="doXml();"/>
+		<input type="buttom" value="发送业务报文" style="text-align: center;margin-top:20px;" onclick="doXml();"/>
 	</center>
 </div>
 </body>

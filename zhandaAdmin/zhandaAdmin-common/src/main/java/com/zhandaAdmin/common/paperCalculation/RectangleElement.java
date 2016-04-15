@@ -1,37 +1,55 @@
 package com.zhandaAdmin.common.paperCalculation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by admin on 2016/3/24.
  */
 public class RectangleElement {
+    private String id;
     private float lenth;
     private float width;
     private Point point;
     private RectangleElement left;
     private RectangleElement right;
     private RectangleElement top;
-    private RectangleElement button;
+    private RectangleElement buttom;
+    private String leftId;
+    private String rightId;
+    private String topId;
+    private String buttonId;
     public enum EDGE{
         LEFT,RIGHT,BUTTOM,TOP
 
     }
 
-    public RectangleElement(float lenth, float width){
+    public RectangleElement(String id,float lenth, float width){
         this.point = new Point(0,0);
         this.lenth = lenth;
         this.width = width;
+        this.id = id;
     }
 
-    RectangleElement(float lenth,float width,Point point){
+    RectangleElement(String id,float lenth,float width,Point point){
         this.point = point;
         this.lenth = lenth;
         this.width = width;
+        this.id = id;
     }
 
-    RectangleElement(float lenth,float width,float x,float y){
+    RectangleElement(String id,float lenth,float width,float x,float y){
         this.point = new Point(x,y);
         this.lenth = lenth;
         this.width = width;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getLenth() {
@@ -64,6 +82,7 @@ public class RectangleElement {
         move(relX,relY,this);
     }
 
+    @JsonIgnore
     public RectangleElement getLeft() {
         return left;
     }
@@ -77,9 +96,12 @@ public class RectangleElement {
         float y = this.point.getY()+(this.lenth-right.lenth)/2;
         left.setPoint(x,y);
         left.right = this;
+        left.rightId =this.id;
         this.left = left;
+        this.leftId = left.id;
     }
 
+    @JsonIgnore
     public RectangleElement getRight() {
         return right;
     }
@@ -93,9 +115,12 @@ public class RectangleElement {
         float y = this.point.getY()+(this.lenth-right.lenth)/2;
         right.setPoint(x,y);
         right.left = this;
+        right.leftId = this.id;
         this.right = right;
+        this.rightId = right.id;
     }
 
+    @JsonIgnore
     public RectangleElement getTop() {
         return top;
     }
@@ -108,24 +133,29 @@ public class RectangleElement {
         float x = this.point.getX()+(this.width-top.width)/2;
         float y = this.point.getY()+this.lenth;
         top.setPoint(x,y);
-        top.button = this;
+        top.buttom = this;
+        top.buttonId = this.id;
         this.top = top;
+        this.topId = top.id;
     }
 
-    public RectangleElement getButton() {
-        return button;
+    @JsonIgnore
+    public RectangleElement getButtom() {
+        return buttom;
     }
 
-    public void setButton(RectangleElement button) {
-        if(button ==null){
-            this.button =null;
+    public void setButtom(RectangleElement buttom) {
+        if(buttom ==null){
+            this.buttom =null;
             return;
         }
         float x = this.point.getX()+(this.width-top.width)/2;
-        float y = this.point.getY()- button.lenth;
-        button.setPoint(x,y);
-        button.top = this;
-        this.button = button;
+        float y = this.point.getY()- buttom.lenth;
+        buttom.setPoint(x,y);
+        buttom.top = this;
+        buttom.topId=this.id;
+        this.buttom = buttom;
+        this.buttonId = buttom.id;
     }
 
     public Point getButtonLeftPoint(){
@@ -164,8 +194,40 @@ public class RectangleElement {
         if(this.getTop()!=null&&this.getTop()!=entrance){
             this.getTop().move(x,y,this);
         }
-        if(this.getButton()!=null&&this.getButton()!=entrance){
-            this.getButton().move(x,y,this);
+        if(this.getButtom()!=null&&this.getButtom()!=entrance){
+            this.getButtom().move(x,y,this);
         }
+    }
+
+    public String getLeftId() {
+        return leftId;
+    }
+
+    public void setLeftId(String leftId) {
+        this.leftId = leftId;
+    }
+
+    public String getRightId() {
+        return rightId;
+    }
+
+    public void setRightId(String rightId) {
+        this.rightId = rightId;
+    }
+
+    public String getTopId() {
+        return topId;
+    }
+
+    public void setTopId(String topId) {
+        this.topId = topId;
+    }
+
+    public String getButtonId() {
+        return buttonId;
+    }
+
+    public void setButtonId(String buttonId) {
+        this.buttonId = buttonId;
     }
 }

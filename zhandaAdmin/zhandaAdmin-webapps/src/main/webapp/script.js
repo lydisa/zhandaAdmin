@@ -2,6 +2,7 @@
 
 // create the module and name it scotchApp
 // also include ngRoute for all our routing needs
+angular.module('component', []);
 var scotchApp = angular.module('scotchApp', ['ngRoute']);
 
 // configure our routes
@@ -71,4 +72,21 @@ scotchApp.controller('aboutController', function ($scope) {
 
 scotchApp.controller('contactController', function ($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
+});
+
+scotchApp.controller('test', function ($scope,ProductService) {
+    $scope.size={
+        width:window.innerWidth
+    }
+    $scope.getBoards = function () {
+        ProductService.get().then(function(data){
+            $scope.boards = data.data;
+        })
+    }
+    $scope.getBoards();
+    // $scope.$watch(function(){
+    //     return window.innerWidth;
+    // }, function(value) {
+    //     $scope.size = value;
+    // });
 });

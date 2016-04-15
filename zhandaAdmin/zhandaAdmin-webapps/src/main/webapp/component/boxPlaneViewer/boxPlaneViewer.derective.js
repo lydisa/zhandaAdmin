@@ -14,6 +14,7 @@
                     var width = node.getAttribute('width') || '400';
                     var height = node.getAttribute('height') || '400';
                     var canvas = document.createElement('canvas');
+                    var boardsCopy;
                     canvas.setAttribute('width', width);
                     canvas.setAttribute('height', height);
                     //相当于demo, 替换原来的元素;
@@ -27,24 +28,43 @@
                     var labelFont = node.getAttribute('label-font') || '50pt Calibri';
                     
                     var draw = function(boards){
+                        //board.width = height board.length = width;
                         var ctx = canvas.getContext('2d');
                         ctx.clearRect(0, 0, width, height);
-                        
+                        var padding = 5;
+                        var totalWidth = 0;
+                        for(var board in boards){
+                            totalWidth+=2* padding +board.matchArea.length;
+                        }
+                        var percent = width/totalWidth;
+                        ctx.scale(percent,percent);
+                        var offsetX = padding;
+                        var offsetY = padding;
+                        for(var board in boards){
+                            //绘制matchArea
+                            ctx.strokeStyle= fixedBoardColor;
+                            ctx.fillRect(board.matchArea.point.x+offsetX,board.matchArea.point.y+offsetY,board.matchArea.length,matchArea.width);
+                            //绘制Area
+                            ctx.strokeStyle = boardColor;
+                            ctx.fillRect(board.area.point.x+offsetX,board.area.point.y+offsetY,board.area.length,area.width);
+                            //绘制element
+                            ctx.strokeStyle = lineColor;
+                            for(var e in board.elements){
+                                ctx.strokeRect(e.point.x+offsetX,e.point.y+offsetY,e.length,e.width);
+                            }
+                            offsetX += board.matchArea.length+2*padding;
+                        }
                     }
                     
                     return {
                         pre: function preLink(scope, instanceElement, instanceAttributes, controller) {
-                            //监听模型, O了
-                            //就监听一个属性;
                             scope.$watch(scope.boards, function (newValue, oldValue) {
-                                // Create the content of the canvas
-                                //包括新建和重绘;
-                                var ctx = canvas.getContext('2d');
-                                ctx.clearRect(0, 0, width, height);
+                                boardsCopy = scope.boards;
+                                draw(boardsCopy);
                             }, true);
                             scope.$watch(scope.size, function (newValue, oldValue) {
                                 width = size.width;
-                                height= size.height;
+                                draw(boardsCopy);
                             }, true);
                         },
                         post: function postLink(scope, instanceElement, instanceAttributes, controller) {}

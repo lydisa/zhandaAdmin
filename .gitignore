@@ -1,92 +1,77 @@
+# .gitignore for maven 
+target/
+*.releaseBackup
 
-### Java template
+# web application files
+#/web-app/WEB-INF
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+*.log
+*.log.*
+
+# project release file
+/*.war
+
+# plugin release file
+/*.zip
+/*.zip.sha1
+
+# older plugin install locations
+/plugins
+/web-app/plugins
+/web-app/WEB-INF/classes
+
+# "temporary" build files
+out/
+build/
+
+# other
+*.iws
+
+#.gitignore for java
 *.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+#Package Files#
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+## .gitignore for eclipse
 
-
-### JetBrains template
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
-
-*.iml
-
-## Directory-based project format:
-.idea/
-# if you remove the above rule, at least ignore the following:
-
-# User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
-
-# Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
-
-# Gradle:
-# .idea/gradle.xml
-# .idea/libraries
-
-# Mongo Explorer plugin:
-# .idea/mongoSettings.xml
-
-## File-based project format:
-*.ipr
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-
-
-### Example user template template
-### Example user template
-
-# IntelliJ project files
-.idea
-out
-gen
-
-### Eclipse template
 *.pydevproject
+.project
 .metadata
-.gradle
-bin/
-tmp/
+bin/**
+tmp/**
+tmp/**/*
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
+.classpath
 .settings/
 .loadpath
-
-# Eclipse Core
-.project
 
 # External tool builders
 .externalToolBuilders/
@@ -97,28 +82,47 @@ local.properties
 # CDT-specific
 .cproject
 
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
-# Java annotation processor (APT)
-.factorypath
-
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin
-.target
+## .gitignore for intellij
 
-# TeXlipse plugin
-.texlipse
+*.iml
+*.ipr
+.idea/
 
-document/
-**/target/*
-.svn/
-*.bat
+## .gitignore for linux
+.*
+!.gitignore
+*~
 
-*.log
+## .gitignore for windows
 
-# Generate by jmh
-BenchmarkList
-CompilerHints
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+## .gitignore for mac os x
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+## hack for graddle wrapper
+!wrapper/*.jar
+!**/wrapper/*.jar
