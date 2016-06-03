@@ -1,0 +1,61 @@
+html{
+    height: 100%;
+}
+body {
+    background: #EFEFEF;
+    height:100%;
+}
+
+.animate {
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.sidebar{
+    min-height: 100%;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    background-color: #DCE9F9;
+}
+.subbar{
+    list-style-type: none;
+}
+
+.header{
+    height:50px;
+    background-color: #3B4763;
+    position: fixed;
+    z-index: 20;
+    top:0;
+    left:180px;
+    right:0;
+    line-height:50px;
+    min-width: 50%;
+}
+.header .btn-link{
+    color: #FFFFFF;
+}
+.branding{
+    height:50px;
+    background-color: #4B79A9;
+}
+.clear{
+    display: block;
+    clear:both;
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    min-height: 100%;
+    overflow: hidden;
+}
+.maincontainer{
+    padding-top: 50px;
+}
+
+.panel{
+    margin:10px;
+    padding: 7px;
+}

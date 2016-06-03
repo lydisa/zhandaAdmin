@@ -20,13 +20,13 @@ public class SqlExcute {
 	private Connection connection;
 
 	/*mysql url的连接字符串*/
-	private static String url = "jdbc:mysql://127.0.0.1/udal_dev1?useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true";
+	private static String url = "jdbc:mysql://132.122.232.56:8022/udal_abc?useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true";
 	//账号
-	private static String user = "root";
+	private static String user = "test";
 	//密码
-	private static String password = "root";
+	private static String password = "test";
 	//表名
-	private static String table = "travelrecord";
+	private static String table = "PRODUCT_RECORD";
 	
 	private Vector<String> vector = new Vector<String>();
 	//mysql jdbc的java包驱动字符串
@@ -69,10 +69,10 @@ public class SqlExcute {
 			Connection con = sqlExcute.getConnection();
 			Statement st = con.createStatement();
 			//执行SQL语句
-			for(int i = 1;i<=100;i++)
+			for(int i = 10001;i<=50000;i++)
 			{
 				//批量插入
-				String sql = "insert "+table+" values("+i+","+i %10+",'1000000','1','1')";
+				String sql = "insert "+table+"(PROD_ID,ALREADY_BUY,form_id,data_name) values("+i+","+i %10+","+i+","+i+")";
 				//System.out.println(sql);
 				st.execute(sql);
 				
