@@ -11,6 +11,14 @@ body {
     -moz-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
+.side{
+    height: 100%;
+    width: 180px;
+    padding:0
+}
+.hide-side{
+
+}
 .sidebar{
     min-height: 100%;
     padding: 0;
@@ -18,6 +26,7 @@ body {
     margin: 0;
     background-color: #DCE9F9;
 }
+
 .subbar{
     list-style-type: none;
 }
@@ -26,7 +35,7 @@ body {
     height:50px;
     background-color: #3B4763;
     position: fixed;
-    z-index: 20;
+    z-index: 10;
     top:0;
     left:180px;
     right:0;
@@ -58,4 +67,48 @@ body {
 .panel{
     margin:10px;
     padding: 7px;
+}
+
+.open-sidebar-button{
+    position:fixed;
+    left:160px;
+    color:#729AC3;
+    font-size: 15px;
+    padding:10px 20px 10px 5px;
+    top:5px;
+    background-color: #3B4763;
+    border-radius: 5px 0 0 5px;
+
+}
+.open-sidebar-button:hover{
+    color: #FFFFFF;
+    left:150px;
+    overflow: hidden;
+}
+.hide-side .open-sidebar-button{
+    color: #3B4763;
+    left:85px;
+    padding:10px 5px 10px 20px;
+    background-color: #4B79A9;
+    border-radius: 0 5px 5px 0;
+}
+
+.hide-side .open-sidebar-button:hover{
+    color: #FFFFFF;
+    left:100px;
+    overflow: hidden;
+}
+
+.hide-side .side{
+    width: 100px;
+}
+.contain{
+    margin-left: 180px;
+}
+.hide-side .contain{
+    margin-left:100px;
+}
+
+.hide-side .header{
+    left:100px;
 }

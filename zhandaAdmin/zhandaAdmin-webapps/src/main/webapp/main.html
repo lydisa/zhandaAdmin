@@ -14,11 +14,12 @@
     <!-- load angular via CDN -->
 
 </head>
-<body ng-controller="mainController"style="height: 100%">
+<body ng-controller="mainController" style="height: 100%">
+<div ng-class="{'hide-side':hideNav}">
     <zhanda-navigation></zhanda-navigation>
-    <div style="margin-left: 180px">
+    <div class="contain animate">
         <zhanda-header></zhanda-header>
-        <div class="maincontainer" style="width: 100%;">
+        <div class="maincontainer animate" style="width: 100%;">
             <div class="panel">
                 <div ng-view></div>
                 <div ng-controller="test" id="viewer">
@@ -30,6 +31,7 @@
         </div>
     </div>
     <p class="clear"></p>
+</div>
 <!-- FOOTER -->
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/angular.js"></script>

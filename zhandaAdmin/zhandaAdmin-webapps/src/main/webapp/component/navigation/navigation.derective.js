@@ -27,6 +27,12 @@
                     }
 
                 });
+
+                element.find('.open-sidebar-button').on('click', function(){
+                    scope.$apply(function(){
+                        $rootScope.hideNav = !$rootScope.hideNav;
+                    });
+                });
             }
         });
 })();

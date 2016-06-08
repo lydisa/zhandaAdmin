@@ -1,18 +1,22 @@
- <div class="col-xs-2 nav fixed" style="height: 100%;width: 180px;padding:0">
-        <div class="branding" >
-        </div>
-     <div class="sidebar">
-            <ul class="nav nav-list">
-                <li ng-repeat="menu in menus" ng-class="{'active':menuSelected.text == menu.text}">
-                    <a href={{menu.href}} ng-click="changeMenu($index)"> <i ng-show="menu.sub!=null" class="glyphicon glyphicon-chevron-down"></i> {{menu.text}}</a>
-                    <div ng-show="menu.checked">
-                        <ul class="subbar">
-                            <li class="animate " ng-repeat="sub in menu.sub">
-                                <a  href={{sub.href}}>{{sub.text}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-         </div>
- </div>
+<div class="col-xs-2 nav fixed side animate" >
+    <div class="open-sidebar-button animate">
+        <i ng-class="{false:'glyphicon glyphicon-chevron-left',true:'glyphicon glyphicon-chevron-right'}[$root.hideNav]"></i>
+    </div>
+    <div class="branding"></div>
+    <div class="sidebar">
+        <ul class="nav nav-list">
+            <li ng-repeat="menu in menus" ng-class="{'active':menuSelected.text == menu.text}">
+                <a href={{menu.href}} ng-click="changeMenu($index)"> <i ng-show="menu.sub!=null"
+                                                                        class="glyphicon glyphicon-chevron-down"></i>
+                    {{menu.text}}</a>
+                <div ng-show="menu.checked">
+                    <ul class="subbar">
+                        <li class="animate " ng-repeat="sub in menu.sub">
+                            <a href={{sub.href}}>{{sub.text}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
