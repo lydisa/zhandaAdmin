@@ -1,0 +1,91 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="scotchApp">
+<head>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+
+    <!--<link rel="stylesheet" href="lib/css/main.css"/>-->
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />-->
+
+    <!-- SPELLS -->
+    <!-- load angular via CDN -->
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+
+        }
+
+        td {
+            border: 1px solid #CCC;
+        }
+
+        .header {
+            background-color: lavender;
+        }
+
+        .inputHolder {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table style=""></table>
+    <button onclick="computeAll()"></button>
+</div>
+</body>
+<script type="text/javascript">
+    for (var i = 0; i < 6; i++) {
+        var row = document.querySelector("table").insertRow(-1);
+        for (var j = 0; j < 6; j++) {
+            var letter = String.fromCharCode("A".charCodeAt(0) + j - 1);
+            var cell = row.insertCell(-1);
+            if (i && j) {
+                cell.innerHTML = "";
+                var input = document.createElement("textarea");
+                input.className = "inputHolder"
+                cell.appendChild(input);
+            }
+            else {
+                cell.innerHTML = i || letter;
+                cell.className = "header";
+            }
+        }
+    }
+    var DATA = {}, INPUTS = [].slice.call(document.querySelectorAll("textarea"));
+    var computeAll = function () {
+        INPUTS.forEach(function (elm) {
+            try {
+                elm.value = DATA[elm.id];
+            } catch (e) {
+            }
+        });
+    };
+    computeAll();
+
+    INPUTS.forEach(function (elm) {
+        elm.onfocus = function (e) {
+            e.target.value = localStorage[e.target.id] || "";
+        };
+        elm.onblur = function (e) {
+            localStorage[e.target.id] = e.target.value;
+            computeAll();
+        };
+        var getter = function () {
+            var value = localStorage[elm.id] || "";
+            if (value.charAt(0) == "=") {
+                with (DATA) return eval(value.substring(1));
+            } else {
+                return isNaN(parseFloat(value)) ? value : parseFloat(value);
+            }
+        };
+        Object.defineProperty(DATA, elm.id, {get: getter});
+        Object.defineProperty(DATA, elm.id.toLowerCase(), {get: getter});
+    });
+</script>
+</html>
