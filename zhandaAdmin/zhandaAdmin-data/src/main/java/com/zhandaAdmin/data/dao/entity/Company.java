@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "COMPANY")
-public class Company implements Serializable {
+public class Company extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */

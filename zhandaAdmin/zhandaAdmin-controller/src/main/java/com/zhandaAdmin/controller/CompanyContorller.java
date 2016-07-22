@@ -22,22 +22,6 @@ public class CompanyContorller {
 	@Autowired
 	@Qualifier("companyService")
 	private ICompanyService companyService;
-	
-	@RequestMapping(value = "/getCompanyById", method = RequestMethod.POST)
-	@ResponseBody
-	public CommonResult getCompanyById(@RequestBody  Company company) throws Exception {
-		//Company company= new Company();
-		//Integer id = Integer.parseInt(param.get("comId"));
-		//company.setComId(id);
-		company = companyService.getCompanyById(company.getComId());
-		CommonResult result = null;
-		if(company != null)
-			result = new CommonResult("0","success",company);
-		else
-			result =new CommonResult("-1","failed",null);
-		return result;
-			
-	}
 
 	@RequestMapping(value = "/getAllCompany", method = RequestMethod.POST)
 	@ResponseBody
@@ -49,6 +33,22 @@ public class CompanyContorller {
 		CommonResult result = null;
 		if(companyList != null)
 			result = new CommonResult("0","success",companyList);
+		else
+			result =new CommonResult("-1","failed",null);
+		return result;
+
+	}
+
+	@RequestMapping(value = "/getCompanyById", method = RequestMethod.POST)
+	@ResponseBody
+	public CommonResult getCompanyById(@RequestBody  Company company) throws Exception {
+		//Company company= new Company();
+		//Integer id = Integer.parseInt(param.get("comId"));
+		//company.setComId(id);
+		company = companyService.getCompanyById(company.getComId());
+		CommonResult result = null;
+		if(company != null)
+			result = new CommonResult("0","success",company);
 		else
 			result =new CommonResult("-1","failed",null);
 		return result;
