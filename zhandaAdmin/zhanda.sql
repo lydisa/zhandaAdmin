@@ -16,10 +16,10 @@ Date: 2016-01-03 21:44:25
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `company`
+-- Table structure for `mainCompany`
 -- ----------------------------
-DROP TABLE IF EXISTS `company`;
-CREATE TABLE `company` (
+DROP TABLE IF EXISTS `mainCompany`;
+CREATE TABLE `mainCompany` (
   `com_id` int(11) NOT NULL AUTO_INCREMENT,
   `com_name` varchar(20) DEFAULT NULL,
   `com_addr` varchar(50) DEFAULT NULL,
@@ -31,9 +31,9 @@ CREATE TABLE `company` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gbk;
 
 -- ----------------------------
--- Records of company
+-- Records of mainCompany
 -- ----------------------------
-INSERT INTO `company` VALUES ('1', '展达', '广东', '李小姐', '1300000000', '8861', '-1');
+INSERT INTO `mainCompany` VALUES ('1', '展达', '广东', '李小姐', '1300000000', '8861', '-1');
 
 -- ----------------------------
 -- Table structure for `deliver_form`

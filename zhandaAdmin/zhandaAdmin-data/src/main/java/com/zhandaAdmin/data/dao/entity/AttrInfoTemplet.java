@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class AttrInfoTemplet extends AttrInfo{
 
+    private BusiObj obj;
     private List<InfoRule> infoRules;
 
 
@@ -17,4 +18,13 @@ public class AttrInfoTemplet extends AttrInfo{
     public void setInfoRules(List<InfoRule> infoRules) {
         this.infoRules = infoRules;
     }
+
+    public BusiObj getObj() {
+        return obj;
+    }
+
+    public void setObj(BusiObj obj) {
+        this.obj = obj;
+    }
+
 }

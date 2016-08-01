@@ -3,6 +3,7 @@ package com.zhandaAdmin.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.zhandaAdmin.controller.interceptor.InfoItemAble;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class CompanyContorller {
 
 	@RequestMapping(value = "/getAllCompany", method = RequestMethod.POST)
 	@ResponseBody
+//	@InfoItemAble(formId = "2")
 	public CommonResult getAllCompany(@RequestBody  Company company) throws Exception {
 		//Company company= new Company();
 		//Integer id = Integer.parseInt(param.get("comId"));

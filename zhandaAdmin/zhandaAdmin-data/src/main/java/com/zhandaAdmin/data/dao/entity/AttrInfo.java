@@ -13,6 +13,7 @@ public class AttrInfo {
     private String field;
     private String options;
     private String target;
+    private String events;
 
     public String getId() {
         return id;

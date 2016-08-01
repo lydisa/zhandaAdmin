@@ -8,7 +8,7 @@ import java.util.List;
 public class testEntity extends BaseEntity {
     private List<Company> companys;
     private String unionName;
-    private Company company;
+    private Company mainCompany;
 
     public List<Company> getCompanys() {
         return companys;
@@ -26,11 +26,11 @@ public class testEntity extends BaseEntity {
         this.unionName = unionName;
     }
 
-    public Company getCompany() {
-        return company;
+    public Company getMainCompany() {
+        return mainCompany;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setMainCompany(Company mainCompany) {
+        this.mainCompany = mainCompany;
     }
 }

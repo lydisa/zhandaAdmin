@@ -2,8 +2,12 @@ package com.zhandaAdmin.controller;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import com.zhandaAdmin.data.dao.entity.AttrPath;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +39,10 @@ public class InfoItemController{
             Class clazz = Class.forName(className);
             Object dto = gson.fromJson(beanJson,clazz);
             InfoDemo demo = new InfoDemo();
-            Object infoItems = demo.getBusiInfo(dto, null, null);
-            System.out.print(infoItems);
+            List<AttrPath> path = new ArrayList<AttrPath>();
+            Map<String, Object>  infoItems = demo.getBusiInfo(dto, null, "info",null,path,null,dto);
+            demo.paveMap(infoItems);
+            //System.out.print(infoItems);
             return new CommonResult("200",
                     "转换成功咯");
         }catch (Exception e){

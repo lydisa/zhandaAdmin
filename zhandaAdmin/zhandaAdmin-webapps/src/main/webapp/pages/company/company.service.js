@@ -40,7 +40,7 @@
                             comName:"company2"
                         }],
                         unionName:"china",
-                        company:{
+                        mainCompany:{
                             comId:4444,
                             comName:"company3"
                         }
